@@ -1,299 +1,370 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Wi-Sun Smart City Research Center</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-      crossorigin=""
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-      crossorigin=""
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.min.js"
-      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <style>
-    html {
-      font-family: Helvetica;
-      display: inline-block;
-      margin: 0px auto;
-      text-align: center;
-    }
 
-    body {
-      margin-top: 50px;
-    }
+<head>
+  <title>Wi-Sun Smart City Research Center</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<style>
+  html {
+    font-family: Helvetica;
+    display: inline-block;
+    margin: 0px auto;
+    text-align: center;
+  }
 
-    h1 {
-      color: #444444;
-      margin: 50px auto 30px;
-    }
+  body {
+    margin-top: 50px;
+  }
 
-    h3 {
-      color: #444444;
-      margin-bottom: 50px;
-    }
+  h1 {
+    color: #444444;
+    margin: 50px auto 30px;
+  }
 
-    .column {
-      float: left;
-      width: 33.33%;
-    }
+  h3 {
+    color: #444444;
+    margin-bottom: 50px;
+  }
 
-    .row {
-      height: 15%;
-    }
+  .column {
+    float: left;
+    width: 33.33%;
+  }
 
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
+  .row {
+    height: 15%;
+  }
 
-    .button {
-      display: block;
-      width: 80px;
-      background-color: #1abc9c;
-      border: none;
-      color: white;
-      padding: 10px;
-      text-decoration: none;
-      font-size: 25px;
-      margin: 0px auto 35px;
-      cursor: pointer;
-      border-radius: 4px;
-      text-align: center;
-    }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
-    #map {
-      height: 500px;
-    }
-    .custom .leaflet-popup-close-button,
-    .custom .leaflet-popup-tip-container {
-      display: none;
-    }
+  .button {
+    display: block;
+    width: 80px;
+    background-color: #1abc9c;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 25px;
+    margin: 0px auto 35px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+  }
 
-    .custom .leaflet-popup-content-wrapper,
-    .custom .leaflet-popup-tip {
-      background-color: transparent;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-    }
+  #map {
+    height: 500px;
+  }
 
-    .custom .leaflet-popup-content {
-      font-size: 0.6rem;
-      color: Black;
-      font-style: italic;
-    }
-  </style>
+  .custom .leaflet-popup-close-button,
+  .custom .leaflet-popup-tip-container {
+    display: none;
+  }
 
-  <body>
-    <div class="row">
-      <div class="column">
-        <img src="{{url_for('static',filename='iiith.png')}}" width="60%" />
-      </div>
-      <div class="column">
-        <img src="{{url_for('static',filename='logo.png')}}" width="60%" />
-      </div>
-      <div class="column">
-        <img
-          src="{{url_for('static',filename='Silicon_Labs.jpg')}}"
-          width="60%"
-        />
+  .custom .leaflet-popup-content-wrapper,
+  .custom .leaflet-popup-tip {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .custom .leaflet-popup-content {
+    font-size: 0.6rem;
+    color: Black;
+    font-style: italic;
+  }
+</style>
+
+<body>
+  <div class="row">
+    <div class="column">
+      <img src="{{url_for('static',filename='iiith.png')}}" width="60%" />
+    </div>
+    <div class="column">
+      <img src="{{url_for('static',filename='logo.png')}}" width="60%" />
+    </div>
+    <div class="column">
+      <img src="{{url_for('static',filename='Silicon_Labs.jpg')}}" width="60%" />
+    </div>
+  </div>
+  <div id="map"></div>
+  <div style="display: flex; justify-content: space-evenly">
+    <div>
+      <h1>NODE1</h1>
+      <input type="button" value="on" id="node1" onclick="Do(this.id)" class="button" />
+    </div>
+    <div>
+      <h1>NODE2</h1>
+      <input type="button" value="on" id="node2" onclick="Do(this.id)" class="button" />
+    </div>
+    <div>
+      <h1>NODE3</h1>
+      <input type="button" value="on" id="node3" onclick="Do(this.id)" class="button" />
+    </div>
+    <div>
+      <h1>NODE4</h1>
+      <input type="button" value="on" id="node4" onclick="Do(this.id)" class="button" />
+    </div>
+    <div>
+      <h1>NODE5</h1>
+      <div style="display:flex;justify-content:space-around;">
+        <input type="button" value="on" id="node5" onclick="Do(this.id)" class="button" style="padding-right:10px;"/>
+        <input type="button" value="dim" id="dim" onclick="Do(this.id)" class="button" style="display:none;" />
       </div>
     </div>
-    <div id="map"></div>
-    <div style="display: flex; justify-content: space-evenly">
-      <div>
-        <h1>NODE1</h1>
-        <input
-          type="button"
-          value="on"
-          id="node1"
-          onclick="Do(this.id)"
-          class="button"
-        />
-      </div>
-      <div>
-        <h1>NODE2</h1>
-        <input
-          type="button"
-          value="on"
-          id="node2"
-          onclick="Do(this.id)"
-          class="button"
-        />
-      </div>
-      <div>
-        <h1>NODE3</h1>
-        <input
-          type="button"
-          value="on"
-          id="node3"
-          onclick="Do(this.id)"
-          class="button"
-        />
-      </div>
-      <div>
-        <h1>NODE4</h1>
-        <input
-          type="button"
-          value="on"
-          id="node4"
-          onclick="Do(this.id)"
-          class="button"
-        />
-      </div>
-      <div>
-        <h1>NODE5</h1>
-        <input
-          type="button"
-          value="on"
-          id="node5"
-          onclick="Do(this.id)"
-          class="button"
-        />
-      </div>
-    </div>
-    <script>
-      var map = L.map("map").setView([17.445369, 78.349937], 22);
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution: "© OpenStreetMap",
-      }).addTo(map);
-      nodes = [
-        ["VindhyaA2(I)", 17.445174, 78.34997],
-        ["VindhyaA2(II)", 17.445367, 78.349737],
-        ["VindhyaA4(I)", 17.445561, 78.349519],
-        ["VindhyaA4(II)", 17.44564, 78.349392],
-        ["VindhyaA6(I)", 17.445808, 78.349193],
-        ["VindhyaA6(II)", 17.445944, 78.349067],
-      ];
-      var customOptions2 = { className: "custom", offset: [5, 62] };
-      for (let i = 0; i < 5; i++) {
-        let popup = L.popup({
-          closeOnclick: false,
-          autoClose: false,
-        }).setContent(nodes[i][0]);
-        labelCircle = L.circle([nodes[i][1], nodes[i][2]], {
-          color: "#orange",
-          fillColor: "#FFA500",
-          fillOpacity: 0.0,
-          radius: 8.0,
-          offset: L.point(100, -500),
-        })
-          .bindPopup(popup, customOptions2)
-          .addTo(map)
-          .openPopup();
-        circle = new L.circle([nodes[i][1], nodes[i][2]], {
-          color: "#orange",
-          fillColor: "#FFA500",
-          fillOpacity: 0.7,
-          radius: 4.0,
-        }).bindPopup(popup,customOptions2).addTo(map).openPopup()
-      }
-    </script>
-    <script>
-      let id1 = document.getElementById("node1");
-      let id2 = document.getElementById("node2");
-      let id3 = document.getElementById("node3");
-      let id4 = document.getElementById("node4");
-      let id5 = document.getElementById("node5");
-      function Do(id) {
-        let current_id = document.getElementById(id);
-        if (id1 == current_id) {
-          if (current_id.value == "on") {
-            current_id.value = "off";
-            $.ajax({
-              url: "/switch?command=on&id=1",
-              method: "POST",
-              contentType: "application/json",
-            });
-          } else {
-            current_id.value = "on";
-            $.ajax({
-              url: "/switch?command=off&id=1",
-              method: "POST",
-              contentType: "application/json",
-            });
-          }
-        } else if (id2 == current_id) {
-          if (current_id.value == "on") {
-            current_id.value = "off";
-            $.ajax({
-              url: "/switch?command=on&id=2",
-              method: "POST",
-              contentType: "application/json",
-            });
-          } else {
-            current_id.value = "on";
-            $.ajax({
-              url: "/switch?command=off&id=2",
-              method: "POST",
-              contentType: "application/json",
-            });
-          }
-        } else if (id3 == current_id) {
-          if (current_id.value == "on") {
-            current_id.value = "off";
-            $.ajax({
-              url: "/switch?command=on&id=3",
-              method: "GET",
-              contentType: "application/json",
-            });
-          } else {
-            current_id.value = "on";
-            $.ajax({
-              url: "/switch?command=off&id=3",
-              method: "GET",
-              contentType: "application/json",
-            });
-          }
-        } else if (id4 == current_id) {
-          if (current_id.value == "on") {
-            current_id.value = "off";
-            $.ajax({
-              url: "/switch?command=on&id=4",
-              method: "GET",
-              contentType: "application/json",
-            });
-          } else {
-            current_id.value = "on";
-            $.ajax({
-              url: "/switch?command=off&id=4",
-              method: "GET",
-              contentType: "application/json",
-            });
-          }
-        } else if (id5 == current_id) {
-          if (current_id.value == "on") {
-            current_id.value = "off";
-            $.ajax({
-              url: "/switch?command=on&id=5",
-              method: "GET",
-              contentType: "application/json",
-            });
-          } else {
-            current_id.value = "on";
-            $.ajax({
-              url: "/switch?command=off&id=5",
-              method: "GET",
-              contentType: "application/json",
-            });
-          }
+    <!-- <div>
+      <h1>NODE6</h1>
+      <input type="button" value="on" id="node6" onclick="Do(this.id)" class="button" />
+    </div> -->
+  </div>
+  <script>
+    circlesObj = []
+    var map = L.map("map").setView([17.445369, 78.349937], 22);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "© OpenStreetMap",
+    }).addTo(map);
+    nodes = [
+      ["VindhyaA2(I)", 17.445174, 78.34997],
+      ["TobeNamed", 17.445367, 78.349737],
+      ["VindhyaA4(I)", 17.445561, 78.349519],
+      ["VindhyaA4(II)", 17.44564, 78.349392],
+      ["VindhyaA6(I)", 17.445808, 78.349193],
+      ["VindhyaA6(II)", 17.445944, 78.349067],
+      ["PollLamp", 17.445100, 78.349947],
+      ["VindhyaA2(II)", 17.445041, 78.350087]
+    ];
+    var customOptions2 = { className: "custom", offset: [5, 62] };
+    for (let i = 0; i < 8; i++) {
+      let popup = L.popup({
+        closeOnclick: false,
+        autoClose: false,
+      }).setContent(nodes[i][0]);
+      // labelCircle = L.circle([nodes[i][1], nodes[i][2]], {
+      //   color: "#orange",
+      //   fillColor: "#FFA500",
+      //   fillOpacity: 0.0,
+      //   radius: 8.0,
+      //   offset: L.point(100, -500),
+      // })
+      //   .bindPopup(popup, customOptions2)
+      //   .addTo(map)
+      //   .openPopup();
+      circle = new L.circle([nodes[i][1], nodes[i][2]], {
+        color: "#7d7b77",
+        fillColor: "#7d7b77",
+        fillOpacity: 0.7,
+        radius: 4.0,
+      })
+        .bindPopup(popup, customOptions2)
+        .addTo(map)
+        .openPopup();
+      circlesObj.push(circle)
+    }
+  </script>
+  <script>
+    let id1 = document.getElementById("node1");
+    let id2 = document.getElementById("node2");
+    let id3 = document.getElementById("node3");
+    let id4 = document.getElementById("node4");
+    let id5 = document.getElementById("node5");
+    let id6 = document.getElementById("node6");
+    let dim = document.getElementById("dim");
+    function Do(id) {
+      let current_id = document.getElementById(id);
+      if (id1 == current_id) {
+        if (current_id.value == "on") {
+          current_id.value = "off";
+          $.ajax({
+            url: "/switch?command=on&id=1",
+            method: "POST",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "on");
+        } else {
+          current_id.value = "on";
+          $.ajax({
+            url: "/switch?command=off&id=1",
+            method: "POST",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "off")
+        }
+      } else if (id2 == current_id) {
+        if (current_id.value == "on") {
+          current_id.value = "off";
+          $.ajax({
+            url: "/switch?command=on&id=2",
+            method: "POST",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "on")
+        } else {
+          current_id.value = "on";
+          $.ajax({
+            url: "/switch?command=off&id=2",
+            method: "POST",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "off")
+        }
+      } else if (id3 == current_id) {
+        if (current_id.value == "on") {
+          current_id.value = "off";
+          $.ajax({
+            url: "/switch?command=on&id=3",
+            method: "GET",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "on")
+        } else {
+          current_id.value = "on";
+          $.ajax({
+            url: "/switch?command=off&id=3",
+            method: "GET",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "off")
+        }
+      } else if (id4 == current_id) {
+        if (current_id.value == "on") {
+          current_id.value = "off";
+          $.ajax({
+            url: "/switch?command=on&id=4",
+            method: "GET",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "on")
+        } else {
+          current_id.value = "on";
+          $.ajax({
+            url: "/switch?command=off&id=4",
+            method: "GET",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "off")
+        }
+      } else if (id5 == current_id) {
+        if (current_id.value == "on") {
+          current_id.value = "off";
+          dim.style.display = "block"
+          $.ajax({
+            url: "/switch?command=on&id=5",
+            method: "GET",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "on")
+        } else {
+          current_id.value = "on";
+          dim.style.display = "none"
+          $.ajax({
+            url: "/switch?command=off&id=5",
+            method: "GET",
+            contentType: "application/json",
+          });
+          showStatus(current_id, "off")
         }
       }
-    </script>
-    <!-- <img src="iiith.png" width="30vw" height="25vh" float="left" >
+      else if (dim == current_id) {
+        console.log("inin")
+        $.ajax({
+          url: "/switch?command=dim&id=5",
+          method: "GET",
+          contentType: "application/json"
+        })
+        showStatus(current_id, "dim")
+      }
+      // else if (id6 == current_id) {
+      //   if (current_id.value == "on") {
+      //     current_id.value = "off";
+      //     $.ajax({
+      //       url: "/switch?command=on&id=6",
+      //       method: "POST",
+      //       contentType: "application/json",
+      //     })
+      //   }
+      //   else
+      //   {
+      //     current_id.value="on";
+      //     $.ajax({
+      //       url:"/switch?command=off&id=6",
+      //       method:"POST",
+      //       contentType:"application/json",
+      //     })
+      //   }
+      // }
+    }
+    function showStatus(id, value) {
+      if (id == id1) {
+        if (value == "on") {
+          console.log("in")
+          circlesObj[0].setStyle({ fillColor: 'green' })
+          circlesObj[7].setStyle({ fillColor: 'green' })
+        }
+        else if (value == "off") {
+          circlesObj[0].setStyle({ fillColor: '#7d7b77' })
+          circlesObj[7].setStyle({ fillColor: '#7d7b77' })
+        }
+      }
+      else if (id == id2) {
+        if (value == "on") {
+          console.log("in")
+          circlesObj[1].setStyle({ fillColor: 'green' })
+        }
+        else if (value == "off") {
+          circlesObj[1].setStyle({ fillColor: '#7d7b77' })
+        }
+      }
+      else if (id == id3) {
+        if (value == "on") {
+          circlesObj[2].setStyle({ fillColor: 'green' })
+          circlesObj[3].setStyle({ fillColor: 'green' })
+        }
+        else {
+          circlesObj[2].setStyle({ fillColor: '#7d7b77' })
+          circlesObj[3].setStyle({ fillColor: '#7d7b77' })
+        }
+      }
+      else if (id == id4) {
+        if (value == "on") {
+          circlesObj[4].setStyle({ fillColor: 'green' })
+          circlesObj[5].setStyle({ fillColor: 'green' })
+        }
+        else {
+          circlesObj[4].setStyle({ fillColor: '#7d7b77' })
+          circlesObj[5].setStyle({ fillColor: '#7d7b77' })
+        }
+      }
+      else if (id == id5) {
+        if (value == "on") {
+          circlesObj[6].setStyle({ fillColor: 'green' })
+        }
+        else {
+          circlesObj[6].setStyle({ fillColor: '#7d7b77' })
+        }
+      }
+      else if (id == dim) {
+        circlesObj[6].setStyle({ fillColor: '#37a141' })
+      }
+    }
+  </script>
+  <!-- <img src="iiith.png" width="30vw" height="25vh" float="left" >
 	<img src="logo.png" width="30vw" height="25vh" float="Center">
 	<img src="Silicon Labs.jpg"  width="30vw" height="25vh" float="right"> -->
-  </body>
+</body>
+
 </html>

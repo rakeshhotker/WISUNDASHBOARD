@@ -35,6 +35,13 @@ def switch():
             "cnf":"text"
         }
     }
+    dim={
+        "m2m:cin":{
+            "con":'.dim5',
+            "lbl":"",
+            "cnf":"text"
+        }
+    }
     test={}
     if (command == "on"):
         x=requests.post(url,headers=headers,json=on)
@@ -42,6 +49,10 @@ def switch():
         print(x.text)
     if(command=="off"):
         x=requests.post(url,headers=headers,json=off)
+        test=x.text
+        print(x.text)
+    if(command=="dim"):
+        x=requests.post(url,headers=headers,json=dim)
         test=x.text
         print(x.text)
     return test
