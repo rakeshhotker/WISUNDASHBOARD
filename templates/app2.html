@@ -12,6 +12,7 @@
     crossorigin=""></script>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src='https://cdn.plot.ly/plotly-2.14.0.min.js'></script>
 </head>
 <style>
   html {
@@ -66,7 +67,9 @@
   }
 
   #map {
-    height: 500px;
+    height: 600px;
+    width: 700px;
+    border:2px solid blue;
   }
 
   .custom .leaflet-popup-close-button,
@@ -87,49 +90,76 @@
     color: Black;
     font-style: italic;
   }
+
+  .sideImages {
+    width: 150px;
+    height: 100px;
+  }
+  #myDiv{
+    margin-top:-1%;
+    margin-left:2%;
+    width:500px;
+    height:350px;
+    border:1px solid gray;
+  }
+  #myDiv1{
+    margin-left:2%;
+    width:500px;
+    height:350px;
+    border:1px solid gray;
+  }
+  #myDiv2{
+    width:500px;
+    height:350px;
+    border:1px solid gray;
+  }
+  #myDiv3{
+    width:500px;
+    height:350px;
+    border:1px solid gray;
+  }
 </style>
 
 <body>
-  <div class="row">
-    <div class="column">
-      <img src="{{url_for('static',filename='iiith.png')}}" width="60%" />
+  <div style="display:flex;justify-content:space-around;align-items:flex-start;margin-left:-5%;border-bottom:2px solid gray;">
+    <div>
+      <img src="{{url_for('static',filename='iiith.png')}}" class="sideImages" />
+      <img src="{{url_for('static',filename='logo.png')}}" class="sideImages"/>
     </div>
-    <div class="column">
-      <img src="{{url_for('static',filename='logo.png')}}" width="60%" />
+    <div>
+      <h1>WISUN DEPLOYMENT<br>DASHBOARD</h1>
     </div>
-    <div class="column">
-      <img src="{{url_for('static',filename='Silicon_Labs.jpg')}}" width="60%" />
+    <div>
+      <img src="{{url_for('static',filename='Silicon_Labs.jpg')}}" class="sideImages" />
     </div>
   </div>
-  <div id="map"></div>
-  <div style="display: flex; justify-content: space-evenly">
-    <div>
-      <h1>NODE1</h1>
-      <input type="button" value="on" id="node1" onclick="Do(this.id)" class="button" />
-    </div>
-    <div>
-      <h1>NODE2</h1>
-      <input type="button" value="on" id="node2" onclick="Do(this.id)" class="button" />
-    </div>
-    <div>
-      <h1>NODE3</h1>
-      <input type="button" value="on" id="node3" onclick="Do(this.id)" class="button" />
-    </div>
-    <div>
-      <h1>NODE4</h1>
-      <input type="button" value="on" id="node4" onclick="Do(this.id)" class="button" />
-    </div>
-    <div>
-      <h1>NODE5</h1>
-      <div style="display:flex;justify-content:space-around;">
-        <input type="button" value="on" id="node5" onclick="Do(this.id)" class="button" style="padding-right:10px;"/>
-        <input type="button" value="dim" id="dim" onclick="Do(this.id)" class="button" style="display:none;" />
+  <div style="display:flex;justify-content:space-around;margin-top:-2%;">
+    <div style="display:flex;flex-direction:column;justify-content:center;">
+      <div>
+        <h1>Temperature</h1>
+        <div id="myDiv"></div>
+      </div>
+      <div>
+        <h1>RSSI</h1>
+        <div id="myDiv1"></div>
       </div>
     </div>
-    <!-- <div>
-      <h1>NODE6</h1>
-      <input type="button" value="on" id="node6" onclick="Do(this.id)" class="button" />
-    </div> -->
+    <div style="display:flex;flex-direction:column;justify-content:center;">
+      <div id="map"></div>
+      <div style="display:flex;flex-direction:column;justify-content:space-around;height:100px;">
+       <div style="margin-top:10%;"><h1>No of wisun nodes:8</h1><h1>No of active nodes:8</h1></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:center;">
+      <div>
+        <h1>Relative Humidity</h1>
+        <div id="myDiv2"></div>
+      </div>
+      <div>
+        <h1>Latency</h1>
+        <div id="myDiv3"></div>
+      </div>
+    </div>
   </div>
   <script>
     circlesObj = []
@@ -149,32 +179,127 @@
       ["VindhyaA2(II)", 17.445041, 78.350087]
     ];
     var customOptions2 = { className: "custom", offset: [5, 62] };
+    var content=`<div><div>RSSI:</div><div>Latency:</div></div>`
     for (let i = 0; i < 8; i++) {
       let popup = L.popup({
         closeOnclick: false,
         autoClose: false,
       }).setContent(nodes[i][0]);
-      // labelCircle = L.circle([nodes[i][1], nodes[i][2]], {
-      //   color: "#orange",
-      //   fillColor: "#FFA500",
-      //   fillOpacity: 0.0,
-      //   radius: 8.0,
-      //   offset: L.point(100, -500),
-      // })
-      //   .bindPopup(popup, customOptions2)
-      //   .addTo(map)
-      //   .openPopup();
-      circle = new L.circle([nodes[i][1], nodes[i][2]], {
-        color: "#7d7b77",
-        fillColor: "#7d7b77",
-        fillOpacity: 0.7,
-        radius: 4.0,
+      let popup2=L.popup({
+        closeOnclick:false,
+        autoClose:false,
+      }).setContent(content);
+      labelCircle = L.circle([nodes[i][1], nodes[i][2]], {
+        color: "#orange",
+        fillColor: "#FFA500",
+        fillOpacity: 0.0,
+        radius: 8.0,
+        offset: L.point(100, -500),
       })
         .bindPopup(popup, customOptions2)
         .addTo(map)
         .openPopup();
+      circle = new L.circle([nodes[i][1], nodes[i][2]], {
+        color: "#7d7b77",
+        fillColor: "green",
+        fillOpacity: 0.7,
+        radius: 4.0,
+      })
+        .bindPopup(popup2, customOptions2)
+        .addTo(map)
+      circle.on('mouseover',function(e){
+        e.preventDefault()
+        this.openPopup()
+      })
       circlesObj.push(circle)
     }
+    var trace1 = {
+      x: [1, 2, 3, 4],
+      y: [20,28,27,35],
+      type: 'scatter'
+    };
+    var trace4={
+      x:[1,2,3,4],
+      y:[39,35,29,20]
+    }
+    var trace2 = {
+      x: [-85, -80, -75, -70],
+      y: [7, 3, 2, 1],
+      type: 'scatter'
+    };
+    var trace3={
+      x:[64,128,256],
+      y:[0,500,1000,],
+      type:'scatter'
+    }
+    var layout={
+      title:{
+        text:'Temperature',
+      },
+      xaxis:{
+        title:{
+          text:'hours'
+        }
+      },
+      yaxis:{
+        title:{
+          text:'Celsius'
+        }
+      }
+    }
+    var layout1={
+      title:{
+        text:'Relative Humidity',
+      },
+      xaxis:{
+        title:{
+          text:'hours'
+        }
+      },
+      yaxis:{
+        title:{
+          text:'%RH'
+        }
+      }
+    }
+    var layout2={
+      title:{
+        text:'RSSI',
+      },
+      xaxis:{
+        title:{
+          text:'RSSI(db)'
+        },
+      },
+      yaxis:{
+        title:{
+          text:'Distance'
+        }
+      }
+    }
+    var layout3={
+      title:{
+        text:'Latency',
+      },
+      xaxis:{
+        title:{
+          text:'PacketSize(bytes)'
+        }
+      },
+      yaxis:{
+        title:{
+          text:'microSeconds'
+        }
+      }
+    }
+    var data = [trace1];
+    var data1=[trace2]
+    var latencydata=[trace3]
+    Plotly.newPlot('myDiv', data,layout);
+    Plotly.newPlot('myDiv1',data1,layout2);
+    Plotly.newPlot('myDiv2',[trace4],layout1);
+    Plotly.newPlot('myDiv3',latencydata,layout3)
+
   </script>
   <script>
     let id1 = document.getElementById("node1");
