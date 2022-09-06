@@ -69,27 +69,40 @@
   #map {
     height: 600px;
     width: 700px;
-    border:2px solid blue;
+    border:2px solid rgb(58, 58, 63);
   }
 
-  .custom .leaflet-popup-close-button,
-  .custom .leaflet-popup-tip-container {
-    display: none;
-  }
+  .popupCustom .leaflet-popup-tip,
+    .popupCustom .leaflet-popup-content-wrapper {
+      background: #FFF8DC;
+      opacity: 0.75;
+      color: #234c5e;
+      border-radius: 2px;
+      transition: transform 2s ease-in-out;
 
-  .custom .leaflet-popup-content-wrapper,
-  .custom .leaflet-popup-tip {
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
+    }
 
-  .custom .leaflet-popup-content {
-    font-size: 0.6rem;
-    color: Black;
-    font-style: italic;
-  }
+
+
+    .custom .leaflet-popup-close-button,
+    .custom .leaflet-popup-tip-container {
+      display: none;
+    }
+
+    .custom .leaflet-popup-content-wrapper,
+    .custom .leaflet-popup-tip {
+      background-color: transparent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+
+    }
+
+    .custom .leaflet-popup-content {
+      font-size: 0.6rem;
+      color: Black;
+      font-style: italic;
+    }
 
   .sideImages {
     width: 150px;
@@ -118,16 +131,22 @@
     height:350px;
     border:1px solid gray;
   }
+  .popupcontent{
+    font-weight:500;
+  }
+  .headings{
+    color:#296d8a;
+  }
 </style>
 
-<body>
+<body style="background-color:lightgray;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
   <div style="display:flex;justify-content:space-around;align-items:flex-start;margin-left:-5%;border-bottom:2px solid gray;">
     <div>
       <img src="{{url_for('static',filename='iiith.png')}}" class="sideImages" />
       <img src="{{url_for('static',filename='logo.png')}}" class="sideImages"/>
     </div>
     <div>
-      <h1>WISUN DEPLOYMENT<br>DASHBOARD</h1>
+      <h1 style="color:#296d8a;">Wi-SUN DEPLOYMENT<br>DASHBOARD</h1>
     </div>
     <div>
       <img src="{{url_for('static',filename='Silicon_Labs.jpg')}}" class="sideImages" />
@@ -136,27 +155,27 @@
   <div style="display:flex;justify-content:space-around;margin-top:-2%;">
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div>
-        <h1>Temperature</h1>
+        <h1 class="headings">Temperature</h1>
         <div id="myDiv"></div>
       </div>
       <div>
-        <h1>RSSI</h1>
+        <h1 class="headings">RSSI</h1>
         <div id="myDiv1"></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div id="map"></div>
       <div style="display:flex;flex-direction:column;justify-content:space-around;height:100px;">
-       <div style="margin-top:10%;"><h1>No of wisun nodes:8</h1><h1>No of active nodes:8</h1></div>
+       <div style="margin-top:10%;border:1px dashed black"><h1>No of Wi-SUN Nodes:&nbsp;<span style="color:green;">5</span></h1><h1>No of Active Nodes:&nbsp;<span style="color:green;">5</span></h1></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div>
-        <h1>Relative Humidity</h1>
+        <h1 class="headings">Relative Humidity</h1>
         <div id="myDiv2"></div>
       </div>
       <div>
-        <h1>Latency</h1>
+        <h1 class="headings">Latency</h1>
         <div id="myDiv3"></div>
       </div>
     </div>
@@ -169,47 +188,50 @@
       attribution: "© OpenStreetMap",
     }).addTo(map);
     nodes = [
-      ["VindhyaA2(I)", 17.445174, 78.34997],
-      ["TobeNamed", 17.445367, 78.349737],
-      ["VindhyaA4(I)", 17.445561, 78.349519],
-      ["VindhyaA4(II)", 17.44564, 78.349392],
-      ["VindhyaA6(I)", 17.445808, 78.349193],
-      ["VindhyaA6(II)", 17.445944, 78.349067],
-      ["PollLamp", 17.445100, 78.349947],
-      ["VindhyaA2(II)", 17.445041, 78.350087]
+      ["VindhyaA2(I)", 17.445174, 78.34997,"WN-LPO2-02"],
+      ["TobeNamed", 17.445367, 78.349737,"WN-LP03-02"],
+      ["VindhyaA4(I)", 17.445561, 78.349519,"WN-LP04-02"],
+      ["VindhyaA4(II)", 17.44564, 78.349392,"WN-LP04-02"],
+      ["VindhyaA6(I)", 17.445808, 78.349193,"WN-LP05-02"],
+      ["VindhyaA6(II)", 17.445944, 78.349067,"WN-LP05-02"],
+      ["PollLamp", 17.445100, 78.349947,"WN-LP01-03"],
+      ["VindhyaA2(II)", 17.445041, 78.350087,"WN-LP02-02"]
     ];
-    var customOptions2 = { className: "custom", offset: [5, 62] };
-    var content=`<div><div>RSSI:</div><div>Latency:</div></div>`
+    var customOptions = { 'width': '600', 'className': 'popupCustom' };
+    var customOptions2 = { 'className': "custom", offset: [5, 62] };
     for (let i = 0; i < 8; i++) {
+      var content=`<div style="display:flex;flex-direction:column;width:200px;height:fit-content"><div class="popupcontent"><strong>NodeID:&nbsp;${nodes[i][3]}</strong></div><div class="popupcontent"><strong>RSSI:&nbsp;${-72}dB</strong></div><div class="popupcontent"><strong>Latency:&nbsp;${628}ms</strong></div></div>`
       let popup = L.popup({
         closeOnclick: false,
         autoClose: false,
       }).setContent(nodes[i][0]);
       let popup2=L.popup({
         closeOnclick:false,
-        autoClose:false,
+        autoClose:true,
       }).setContent(content);
-      labelCircle = L.circle([nodes[i][1], nodes[i][2]], {
-        color: "#orange",
-        fillColor: "#FFA500",
-        fillOpacity: 0.0,
-        radius: 8.0,
-        offset: L.point(100, -500),
-      })
-        .bindPopup(popup, customOptions2)
-        .addTo(map)
-        .openPopup();
+      // labelCircle = L.circle([nodes[i][1], nodes[i][2]], {
+      //   color: "#orange",
+      //   fillColor: "#FFA500",
+      //   fillOpacity: 0.0,
+      //   radius: 4.0,
+      //   offset: L.point(100, -500),
+      // })
+        // .bindPopup(popup, customOptions2)
+        // .addTo(map)
+        // .openPopup();
       circle = new L.circle([nodes[i][1], nodes[i][2]], {
         color: "#7d7b77",
-        fillColor: "green",
+        fillColor: "lightgray",
         fillOpacity: 0.7,
-        radius: 4.0,
+        radius: 2.0,
       })
-        .bindPopup(popup2, customOptions2)
-        .addTo(map)
+        .bindPopup(popup2, customOptions)
+        .addTo(map).openPopup()
       circle.on('mouseover',function(e){
-        e.preventDefault()
         this.openPopup()
+      })
+      circle.on('click',function(){
+        this.setStyle({fillColor:'green'})
       })
       circlesObj.push(circle)
     }
@@ -233,9 +255,8 @@
       type:'scatter'
     }
     var layout={
-      title:{
-        text:'Temperature',
-      },
+      paper_bgcolor:'lightgray',
+      plot_bgcolor:'lightgray',
       xaxis:{
         title:{
           text:'hours'
@@ -248,9 +269,8 @@
       }
     }
     var layout1={
-      title:{
-        text:'Relative Humidity',
-      },
+      paper_bgcolor:'lightgray',
+      plot_bgcolor:'lightgray',
       xaxis:{
         title:{
           text:'hours'
@@ -263,9 +283,8 @@
       }
     }
     var layout2={
-      title:{
-        text:'RSSI',
-      },
+      paper_bgcolor:'lightgray',
+      plot_bgcolor:'lightgray',
       xaxis:{
         title:{
           text:'RSSI(db)'
@@ -278,9 +297,8 @@
       }
     }
     var layout3={
-      title:{
-        text:'Latency',
-      },
+      paper_bgcolor:'lightgray',
+      plot_bgcolor:'lightgray',
       xaxis:{
         title:{
           text:'PacketSize(bytes)'
