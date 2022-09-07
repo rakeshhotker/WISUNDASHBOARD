@@ -108,12 +108,15 @@
     width: 150px;
     height: 100px;
   }
-  #myDiv{
+  /* #myDiv{
     margin-top:-1%;
     margin-left:2%;
     width:500px;
     height:350px;
     border:1px solid gray;
+  } */
+  .myDiv{
+    margin-top:15%;
   }
   #myDiv1{
     margin-left:2%;
@@ -121,11 +124,11 @@
     height:350px;
     border:1px solid gray;
   }
-  #myDiv2{
+  /* #myDiv2{
     width:500px;
     height:350px;
     border:1px solid gray;
-  }
+  } */
   #myDiv3{
     width:500px;
     height:350px;
@@ -155,8 +158,7 @@
   <div style="display:flex;justify-content:space-around;margin-top:-2%;">
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div>
-        <h1 class="headings">Temperature</h1>
-        <div id="myDiv"></div>
+        <div class="myDiv"><iframe style="width:500px;height:300px" src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&from=1661931232113&to=1662536032114&panelId=38" width="450" height="200" frameborder="0"></iframe></div>
       </div>
       <div>
         <h1 class="headings">RSSI</h1>
@@ -171,8 +173,7 @@
     </div>
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div>
-        <h1 class="headings">Relative Humidity</h1>
-        <div id="myDiv2"></div>
+        <div class="myDiv"><iframe style="width:500px;height: 300px;" src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&kiosk=&from=1661931282414&to=1662536082415&panelId=53" width="450" height="200" frameborder="0"></iframe></div>
       </div>
       <div>
         <h1 class="headings">Latency</h1>
@@ -194,12 +195,29 @@
       ["VindhyaA4(II)", 17.44564, 78.349392,"WN-LP04-02"],
       ["VindhyaA6(I)", 17.445808, 78.349193,"WN-LP05-02"],
       ["VindhyaA6(II)", 17.445944, 78.349067,"WN-LP05-02"],
-      ["PollLamp", 17.445100, 78.349947,"WN-LP01-03"],
-      ["VindhyaA2(II)", 17.445041, 78.350087,"WN-LP02-02"]
+      ["PollLamp", 17.445100, 78.349947,"WN-LP01-03",],
+      ["VindhyaA2(II)", 17.445041, 78.350087,"WN-LP02-02"],
+      ["Pole26",17.445363,78.351186,"WN-LP06-01"],
+      ["Pole25",17.445192,78.350941,"WN-LP07-01"],
+      ["Pole22",17.444897,78.350772,"WN-LP08-01"],
+      ["Pole21",17.444843,78.350652,"WN-LP09-01"],
+      ["Pole20",17.444524,78.350334,"WN-LP10-01"],
+      ["Pole19",17.444374,78.350209,"WN-LP12-01"],
+      ["Pole18",17.444275,78.349894,"WN-LP12-01"],
+      ["Pole59",17.445425,78.348516,"WN-LP20-01"],
+      ["Pole67",17.445629,78.348365,"WN-LP21-01"],
+      ["Pole78",17.446124,78.348429,"WN-LP22-01"],
+      ["Pole77",17.446225,78.348707,"WN-LP23-01"],
+      ["Pole80",17.446363,78.348946,"WN-LP24-01"],
+      ["Pole81",17.446485,78.349105,"WN-LP25-01"],
+      ["Pole83",17.446749,78.349350,"WN-LP27-01"],
+      ["Pole84",17.446831,78.349501,"WN-LP28-01"],
+      ["Pole38",17.446746,78.349531,"WN-LP29-01"],
+      ["Pole 37",17.446648,78.349788,"WN-LP30-01"]
     ];
     var customOptions = { 'width': '600', 'className': 'popupCustom' };
     var customOptions2 = { 'className': "custom", offset: [5, 62] };
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < nodes.length; i++) {
       var content=`<div style="display:flex;flex-direction:column;width:200px;height:fit-content"><div class="popupcontent"><strong>NodeID:&nbsp;${nodes[i][3]}</strong></div><div class="popupcontent"><strong>RSSI:&nbsp;${-72}dB</strong></div><div class="popupcontent"><strong>Latency:&nbsp;${628}ms</strong></div></div>`
       let popup = L.popup({
         closeOnclick: false,
@@ -232,6 +250,10 @@
       })
       circle.on('click',function(){
         this.setStyle({fillColor:'green'})
+        test(nodes[i][0])
+      })
+      circle.on('dblclick',function(){
+        // test()
       })
       circlesObj.push(circle)
     }
@@ -313,9 +335,9 @@
     var data = [trace1];
     var data1=[trace2]
     var latencydata=[trace3]
-    Plotly.newPlot('myDiv', data,layout);
+    // Plotly.newPlot('myDiv', data,layout);
     Plotly.newPlot('myDiv1',data1,layout2);
-    Plotly.newPlot('myDiv2',[trace4],layout1);
+    // Plotly.newPlot('myDiv2',[trace4],layout1);
     Plotly.newPlot('myDiv3',latencydata,layout3)
 
   </script>
@@ -327,6 +349,10 @@
     let id5 = document.getElementById("node5");
     let id6 = document.getElementById("node6");
     let dim = document.getElementById("dim");
+    function test(x)
+    {
+      console.log(x)
+    }
     function Do(id) {
       let current_id = document.getElementById(id);
       if (id1 == current_id) {
