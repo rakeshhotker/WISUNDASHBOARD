@@ -122,7 +122,7 @@
     margin-left:2%;
     width:500px;
     height:350px;
-    border:1px solid gray;
+    /* border:1px solid gray; */
   }
   /* #myDiv2{
     width:500px;
@@ -132,7 +132,7 @@
   #myDiv3{
     width:500px;
     height:350px;
-    border:1px solid gray;
+    /* border:1px solid gray; */
   }
   .popupcontent{
     font-weight:500;
@@ -145,14 +145,14 @@
 <body style="background-color:#181B1F;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
   <div style="display:flex;justify-content:space-around;align-items:flex-start;margin-left:-5%;border-bottom:2px solid gray;">
     <div>
-      <img src="{{url_for('static',filename='iiith.png')}}" class="sideImages"/>
-      <img src="{{url_for('static',filename='logo.png')}}" class="sideImages"/>
+      <img src="{{url_for('static',filename='iiit-h-removebg-preview.png')}}" class="sideImages"/>
+      <img src="{{url_for('static',filename='my-image (1).png')}}" class="sideImages"/>
     </div>
     <div>
       <h1 style="color:#e2e8eb;">Wi-SUN DEPLOYMENT<br>DASHBOARD</h1>
     </div>
     <div>
-      <img src="{{url_for('static',filename='Silicon_Labs.jpg')}}" class="sideImages" />
+      <img src="{{url_for('static',filename='logo-silabs.png')}}" class="sideImages" style="width:130px;height:90px"/>
     </div>
   </div>
   <div style="display:flex;justify-content:space-around;margin-top:-2%;">
@@ -168,7 +168,7 @@
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div id="map"></div>
       <div style="display:flex;flex-direction:column;justify-content:space-around;height:100px;">
-       <div style="margin-top:10%;border:1px dashed rgb(175, 156, 156)"><h1 class="headings">No of Wi-SUN Nodes:&nbsp;<span style="color:green;">5</span></h1><h1 class="headings">No of Active Nodes:&nbsp;<span style="color:green;">5</span></h1></div>
+       <div style="margin-top:10%;border:1px dashed rgb(175, 156, 156)"><h1 class="headings">No of Wi-SUN Nodes:&nbsp;<span style="color:green;" id="wisuncount"></span></h1><h1 class="headings">No of Active Nodes:&nbsp;<span style="color:green;" id="activecount">0</span></h1></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;justify-content:center;">
@@ -182,7 +182,7 @@
     </div>
   </div>
   <script>
-    circlesObj = []
+    let activeNodeCount=0
     var map = L.map("map").setView([17.445369, 78.349937], 18);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
@@ -217,8 +217,9 @@
     ];
     var customOptions = { 'width': '600', 'className': 'popupCustom' };
     var customOptions2 = { 'className': "custom", offset: [5, 62] };
+    document.getElementById("wisuncount").innerHTML=nodes.length;
     for (let i = 0; i < nodes.length; i++) {
-      var content=`<div style="display:flex;flex-direction:column;width:200px;height:fit-content"><div class="popupcontent"><strong>NodeID:&nbsp;${nodes[i][3]}</strong></div><div class="popupcontent"><strong>RSSI:&nbsp;${-72}dB</strong></div><div class="popupcontent"><strong>Latency:&nbsp;${628}ms</strong></div></div>`
+      var content=`<div style="display:flex;flex-direction:column;width:200px;height:fit-content" onclick="PopupContent('` + nodes[i][0] +`')"><div class="popupcontent"><strong>NodeID:&nbsp;${nodes[i][3]}</strong></div><div class="popupcontent"><strong>RSSI:&nbsp;${-72}dB</strong></div><div class="popupcontent"><strong>Latency:&nbsp;${628}ms</strong></div></div>`
       let popup = L.popup({
         closeOnclick: false,
         autoClose: false,
@@ -248,16 +249,29 @@
       circle.on('mouseover',function(e){
         this.openPopup()
       })
+      let flag=0;
       circle.on('click',function(e){
-        this.setStyle({fillColor:'green'})
-        test(i)
+        if(!flag){
+          this.setStyle({fillColor:'green'})
+          test(i)
+          flag=1;
+          activeNodeCount++;
+          document.getElementById("activecount").innerHTML=activeNodeCount
+        }
+        else
+        {
+          this.setStyle({fillColor:'lightgray'})
+          test1(i)
+          flag=0;
+          activeNodeCount--;
+          document.getElementById("activecount").innerHTML=activeNodeCount
+        }
       })
-      circle.on('dblclick',function(e){
-        // test()
-        test1(i)
-        this.setStyle({fillColor:"lightgray"})
-      })
-      circlesObj.push(circle)
+      // circle.on('dblclick',function(e){
+      //   // test()
+      //   test1(i)
+      //   this.setStyle({fillColor:"lightgray"})
+      // })
     }
     var trace1 = {
       x: [1, 2, 3, 4],
@@ -271,16 +285,22 @@
     var trace2 = {
       x: [-85, -80, -75, -70],
       y: [7, 3, 2, 1],
-      type: 'scatter'
+      type: 'scatter',
+      marker:{
+        color:'red'
+      }
     };
     var trace3={
       x:[64,128,256],
       y:[0,500,1000,],
-      type:'scatter'
+      type:'scatter',
+      marker:{
+        color:'red'
+      }
     }
     var layout={
-      paper_bgcolor:'lightgray',
-      plot_bgcolor:'lightgray',
+      paper_bgcolor:'#181B1F',
+      plot_bgcolor:'#181B1F',
       xaxis:{
         title:{
           text:'hours'
@@ -293,44 +313,81 @@
       }
     }
     var layout1={
-      paper_bgcolor:'lightgray',
-      plot_bgcolor:'lightgray',
+      paper_bgcolor:'#181B1F',
+      plot_bgcolor:'#181B1F',
       xaxis:{
         title:{
           text:'hours'
-        }
+        },
+       
       },
       yaxis:{
         title:{
           text:'%RH'
-        }
+        },
+        titlefont:{
+          color:'white'
+        },
+        gridColor:'#000'
       }
     }
     var layout2={
-      paper_bgcolor:'lightgray',
-      plot_bgcolor:'lightgray',
+      paper_bgcolor:'#181B1F',
+      plot_bgcolor:'#181B1F',
       xaxis:{
         title:{
           text:'RSSI(db)'
         },
+        titlefont:{
+          color:'white'
+        },
+        gridcolor:'white',
+        tickfont:{
+          size:15,
+          color:'white'
+        }
       },
       yaxis:{
         title:{
           text:'Distance'
+        },
+        titlefont:{
+          color:'white'
+        },
+        gridcolor:'white',
+        tickfont:{
+          size:15,
+          color:'white'
         }
       }
     }
     var layout3={
-      paper_bgcolor:'lightgray',
-      plot_bgcolor:'lightgray',
+      paper_bgcolor:'#181B1F',
+      plot_bgcolor:'#181B1F',
       xaxis:{
         title:{
           text:'PacketSize(bytes)'
+        },
+        titlefont:{
+          color:'white'
+        },
+        gridcolor:'white',
+        tickfont:{
+          size:15,
+          color:'white'
         }
       },
       yaxis:{
         title:{
           text:'microSeconds'
+        },
+        titlefont:{
+          color:'white'
+        },
+        gridcolor:'white',
+        tickfont:{
+          size:15,
+          color:'white'
         }
       }
     }
@@ -543,6 +600,9 @@
       else if (id == dim) {
         circlesObj[6].setStyle({ fillColor: '#37a141' })
       }
+    }
+    function PopupContent(x){
+      console.log(x)
     }
   </script>
   <!-- <img src="iiith.png" width="30vw" height="25vh" float="left" >
