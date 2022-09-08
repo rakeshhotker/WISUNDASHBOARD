@@ -3,7 +3,6 @@ from flask import request
 import requests
 
 app = Flask(__name__, static_url_path='/static')
-
 x=""
 @app.route("/", methods=["POST", "GET"])
 def home():
@@ -13,6 +12,7 @@ def home():
 
 @app.route("/switch", methods=["POST", "GET"])
 def switch():
+    count=0
     command = request.args.get("command")
     id = request.args.get("id")
     print(command,id)
@@ -23,14 +23,14 @@ def switch():
     }
     on={
         "m2m:cin": {
-                    "con":'.'+command+id,
+                    "con":id,
                     "lbl":"",
                     "cnf":"text"
         }
     }
     off = {
         "m2m:cin": {
-            "con":'.'+command+id,
+            "con":id,
             "lbl":"",
             "cnf":"text"
         }

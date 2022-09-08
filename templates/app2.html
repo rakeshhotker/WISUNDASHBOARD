@@ -138,18 +138,18 @@
     font-weight:500;
   }
   .headings{
-    color:#296d8a;
+    color:#e2e8eb;
   }
 </style>
 
-<body style="background-color:lightgray;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+<body style="background-color:#181B1F;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
   <div style="display:flex;justify-content:space-around;align-items:flex-start;margin-left:-5%;border-bottom:2px solid gray;">
     <div>
-      <img src="{{url_for('static',filename='iiith.png')}}" class="sideImages" />
+      <img src="{{url_for('static',filename='iiith.png')}}" class="sideImages"/>
       <img src="{{url_for('static',filename='logo.png')}}" class="sideImages"/>
     </div>
     <div>
-      <h1 style="color:#296d8a;">Wi-SUN DEPLOYMENT<br>DASHBOARD</h1>
+      <h1 style="color:#e2e8eb;">Wi-SUN DEPLOYMENT<br>DASHBOARD</h1>
     </div>
     <div>
       <img src="{{url_for('static',filename='Silicon_Labs.jpg')}}" class="sideImages" />
@@ -158,7 +158,7 @@
   <div style="display:flex;justify-content:space-around;margin-top:-2%;">
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div>
-        <div class="myDiv"><iframe style="width:500px;height:300px" src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&from=1661931232113&to=1662536032114&panelId=38" width="450" height="200" frameborder="0"></iframe></div>
+        <div class="myDiv"><iframe style="width:500px;height:300px" src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&panelId=38" width="450" height="200" frameborder="0"></iframe></div>
       </div>
       <div>
         <h1 class="headings">RSSI</h1>
@@ -168,12 +168,12 @@
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div id="map"></div>
       <div style="display:flex;flex-direction:column;justify-content:space-around;height:100px;">
-       <div style="margin-top:10%;border:1px dashed black"><h1>No of Wi-SUN Nodes:&nbsp;<span style="color:green;">5</span></h1><h1>No of Active Nodes:&nbsp;<span style="color:green;">5</span></h1></div>
+       <div style="margin-top:10%;border:1px dashed rgb(175, 156, 156)"><h1 class="headings">No of Wi-SUN Nodes:&nbsp;<span style="color:green;">5</span></h1><h1 class="headings">No of Active Nodes:&nbsp;<span style="color:green;">5</span></h1></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div>
-        <div class="myDiv"><iframe style="width:500px;height: 300px;" src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&kiosk=&from=1661931282414&to=1662536082415&panelId=53" width="450" height="200" frameborder="0"></iframe></div>
+        <div class="myDiv"><iframe style="width:500px;height: 300px;" src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&kiosk=&panelId=53" width="450" height="200" frameborder="0"></iframe></div>
       </div>
       <div>
         <h1 class="headings">Latency</h1>
@@ -183,37 +183,37 @@
   </div>
   <script>
     circlesObj = []
-    var map = L.map("map").setView([17.445369, 78.349937], 22);
+    var map = L.map("map").setView([17.445369, 78.349937], 18);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: "© OpenStreetMap",
     }).addTo(map);
     nodes = [
-      ["VindhyaA2(I)", 17.445174, 78.34997,"WN-LPO2-02"],
-      ["TobeNamed", 17.445367, 78.349737,"WN-LP03-02"],
-      ["VindhyaA4(I)", 17.445561, 78.349519,"WN-LP04-02"],
-      ["VindhyaA4(II)", 17.44564, 78.349392,"WN-LP04-02"],
-      ["VindhyaA6(I)", 17.445808, 78.349193,"WN-LP05-02"],
-      ["VindhyaA6(II)", 17.445944, 78.349067,"WN-LP05-02"],
-      ["PollLamp", 17.445100, 78.349947,"WN-LP01-03",],
-      ["VindhyaA2(II)", 17.445041, 78.350087,"WN-LP02-02"],
-      ["Pole26",17.445363,78.351186,"WN-LP06-01"],
-      ["Pole25",17.445192,78.350941,"WN-LP07-01"],
-      ["Pole22",17.444897,78.350772,"WN-LP08-01"],
-      ["Pole21",17.444843,78.350652,"WN-LP09-01"],
-      ["Pole20",17.444524,78.350334,"WN-LP10-01"],
-      ["Pole19",17.444374,78.350209,"WN-LP12-01"],
-      ["Pole18",17.444275,78.349894,"WN-LP12-01"],
-      ["Pole59",17.445425,78.348516,"WN-LP20-01"],
-      ["Pole67",17.445629,78.348365,"WN-LP21-01"],
-      ["Pole78",17.446124,78.348429,"WN-LP22-01"],
-      ["Pole77",17.446225,78.348707,"WN-LP23-01"],
-      ["Pole80",17.446363,78.348946,"WN-LP24-01"],
-      ["Pole81",17.446485,78.349105,"WN-LP25-01"],
-      ["Pole83",17.446749,78.349350,"WN-LP27-01"],
-      ["Pole84",17.446831,78.349501,"WN-LP28-01"],
-      ["Pole38",17.446746,78.349531,"WN-LP29-01"],
-      ["Pole 37",17.446648,78.349788,"WN-LP30-01"]
+      ["VindhyaA2(I)", 17.445174, 78.34997,"WN-LPO2-02",".LP02ON",".LP02OFF"],
+      ["TobeNamed", 17.445367, 78.349737,"WN-LP03-02",".LP03ON",".LP03OFF"],
+      ["VindhyaA4(I)", 17.445561, 78.349519,"WN-LP04-02",".LP04ON",".LP04OFF"],
+      // ["VindhyaA4(II)", 17.44564, 78.349392,"WN-LP04-02"],
+      ["VindhyaA6(I)", 17.445808, 78.349193,"WN-LP05-02",".LP05ON",".LP05OFF"],
+      // ["VindhyaA6(II)", 17.445944, 78.349067,"WN-LP05-02"],
+      ["PollLamp", 17.445100, 78.349947,"WN-LP01-03",".LP01ON",".LP01OFF"],
+      // ["VindhyaA2(II)", 17.445041, 78.350087,"WN-LP02-02"],
+      ["Pole26",17.445363,78.351186,"WN-LP06-01",".LP06ON",".LP06OFF"],
+      ["Pole25",17.445192,78.350941,"WN-LP07-01",".LP07ON",".LP07OFF"],
+      ["Pole22",17.444897,78.350772,"WN-LP08-01",".LP08ON",".LP08OFF"],
+      ["Pole21",17.444843,78.350652,"WN-LP09-01",".LP09ON",".LP09OFF"],
+      ["Pole20",17.444524,78.350334,"WN-LP10-01",".LP10ON",".LP10OFF"],
+      ["Pole19",17.444374,78.350209,"WN-LP12-01",".LP12ON",".LP12OFF"],
+      ["Pole18",17.444275,78.349894,"WN-LP12-01",".LP12ON",".LP12OFF"],
+      ["Pole59",17.445425,78.348516,"WN-LP20-01",".LP20ON",".LP20OFF"],
+      ["Pole67",17.445629,78.348365,"WN-LP21-01",".LP21ON",".LP21OFF"],
+      ["Pole78",17.446124,78.348429,"WN-LP22-01",".LP22ON",".LP22OFF"],
+      ["Pole77",17.446225,78.348707,"WN-LP23-01",".LP23ON",".LP23OFF"],
+      ["Pole80",17.446363,78.348946,"WN-LP24-01",".LP24ON",".LP24OFF"],
+      ["Pole81",17.446485,78.349105,"WN-LP25-01",".LP25ON",".LP25OFF"],
+      ["Pole83",17.446749,78.349350,"WN-LP27-01",".LP27ON",".LP27OFF"],
+      ["Pole84",17.446831,78.349501,"WN-LP28-01",".LP28ON",".LP28OFF"],
+      ["Pole38",17.446746,78.349531,"WN-LP29-01",".LP29ON",".LP29OFF"],
+      ["Pole 37",17.446648,78.349788,"WN-LP30-01",".LP30ON",".LP30OFF"]
     ];
     var customOptions = { 'width': '600', 'className': 'popupCustom' };
     var customOptions2 = { 'className': "custom", offset: [5, 62] };
@@ -248,12 +248,14 @@
       circle.on('mouseover',function(e){
         this.openPopup()
       })
-      circle.on('click',function(){
+      circle.on('click',function(e){
         this.setStyle({fillColor:'green'})
-        test(nodes[i][0])
+        test(i)
       })
-      circle.on('dblclick',function(){
+      circle.on('dblclick',function(e){
         // test()
+        test1(i)
+        this.setStyle({fillColor:"lightgray"})
       })
       circlesObj.push(circle)
     }
@@ -349,9 +351,21 @@
     let id5 = document.getElementById("node5");
     let id6 = document.getElementById("node6");
     let dim = document.getElementById("dim");
-    function test(x)
+    function test1(index)
     {
-      console.log(x)
+      $.ajax({
+          url:`/switch?command=off&id=${nodes[index][5]}`,
+          method:"POST",
+          contentType:"application/json",
+        })
+    }
+    function test(index)
+    {
+      $.ajax({
+          url:`/switch?command=on&id=${nodes[index][4]}`,
+          method:"POST",
+          contentType:"application/json",
+        })
     }
     function Do(id) {
       let current_id = document.getElementById(id);
