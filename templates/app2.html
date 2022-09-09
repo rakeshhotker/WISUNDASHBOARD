@@ -67,47 +67,49 @@
   }
 
   #map {
-    height: 600px;
-    width: 700px;
-    border:2px solid rgb(58, 58, 63);
+    height: 650px;
+    width: 900px;
+    border: 2px solid rgb(58, 58, 63);
+    background-color: #28282B;
   }
 
   .popupCustom .leaflet-popup-tip,
-    .popupCustom .leaflet-popup-content-wrapper {
-      background: #FFF8DC;
-      opacity: 0.75;
-      color: #234c5e;
-      border-radius: 2px;
-      transition: transform 2s ease-in-out;
+  .popupCustom .leaflet-popup-content-wrapper {
+    background: #FFF8DC;
+    opacity: 0.75;
+    color: #234c5e;
+    border-radius: 2px;
+    transition: transform 2s ease-in-out;
 
-    }
+  }
 
 
 
-    .custom .leaflet-popup-close-button,
-    .custom .leaflet-popup-tip-container {
-      display: none;
-    }
+  .custom .leaflet-popup-close-button,
+  .custom .leaflet-popup-tip-container {
+    display: none;
+  }
 
-    .custom .leaflet-popup-content-wrapper,
-    .custom .leaflet-popup-tip {
-      background-color: transparent;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
+  .custom .leaflet-popup-content-wrapper,
+  .custom .leaflet-popup-tip {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 
-    }
+  }
 
-    .custom .leaflet-popup-content {
-      font-size: 0.6rem;
-      color: Black;
-      font-style: italic;
-    }
+  .custom .leaflet-popup-content {
+    font-size: 0.6rem;
+    color: Black;
+    font-style: italic;
+  }
 
   .sideImages {
     width: 150px;
     height: 100px;
   }
+
   /* #myDiv{
     margin-top:-1%;
     margin-left:2%;
@@ -115,118 +117,146 @@
     height:350px;
     border:1px solid gray;
   } */
-  .myDiv{
-    margin-top:15%;
+  .myDiv {
+    margin-top: 15%;
   }
-  #myDiv1{
-    margin-left:2%;
-    width:500px;
-    height:350px;
+
+  #myDiv1 {
+    margin-left: 2%;
+    width: 400px;
+    height: 300px;
     /* border:1px solid gray; */
   }
+
   /* #myDiv2{
     width:500px;
     height:350px;
     border:1px solid gray;
   } */
-  #myDiv3{
-    width:500px;
-    height:350px;
+  #myDiv3 {
+    width: 400px;
+    height: 300px;
     /* border:1px solid gray; */
   }
-  .popupcontent{
-    font-weight:500;
+
+  .popupcontent {
+    font-weight: 500;
   }
-  .headings{
+
+  .headings {
+    color: #e2e8eb;
+  }
+
+  :root {
+    --map-tiles-filter: brightness(0.6) invert(1) contrast(5) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .map-tiles {
+      filter: var(--map-tiles-filter, none);
+    }
+  }
+  .statusdetails{
     color:#e2e8eb;
+    font-size:20px;
   }
 </style>
 
 <body style="background-color:#181B1F;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-  <div style="display:flex;justify-content:space-around;align-items:flex-start;margin-left:-5%;border-bottom:2px solid gray;">
+  <div
+    style="display:flex;justify-content:space-around;align-items:flex-start;margin-left:-5%;border-bottom:2px solid gray;">
     <div>
-      <img src="{{url_for('static',filename='iiit-h-removebg-preview.png')}}" class="sideImages"/>
-      <img src="{{url_for('static',filename='my-image (1).png')}}" class="sideImages"/>
+      <img src="{{url_for('static',filename='iiit-h-removebg-preview.png')}}" class="sideImages" />
+      <img src="{{url_for('static',filename='my-image (1).png')}}" class="sideImages" />
+    </div>
+    <div style="display:flex;align-items:flex-end;">
+      <img src="{{url_for('static',filename='wisun-logo.png')}}" class="sideImages"/>
+      <h1 style="color:#e2e8eb;">DEPLOYMENT DASHBOARD</h1>
     </div>
     <div>
-      <h1 style="color:#e2e8eb;">Wi-SUN DEPLOYMENT<br>DASHBOARD</h1>
-    </div>
-    <div>
-      <img src="{{url_for('static',filename='logo-silabs.png')}}" class="sideImages" style="width:130px;height:100px"/>
+      <img src="{{url_for('static',filename='logo-silabs.png')}}" class="sideImages" style="width:130px;height:100px" />
     </div>
   </div>
-  <div style="display:flex;justify-content:space-around;margin-top:-2%;">
+  <div style="display:flex;justify-content:space-around;">
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div>
-        <div class="myDiv"><iframe style="width:500px;height:300px" src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&panelId=38" width="450" height="200" frameborder="0"></iframe></div>
+        <div class="myDiv"><iframe style="width:400px;height:200px"
+            src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&panelId=38"
+            width="450" height="200" frameborder="0"></iframe></div>
       </div>
       <div>
-        <h1 class="headings">RSSI</h1>
+        <h1 class="statusdetails">RSSI</h1>
         <div id="myDiv1"></div>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;justify-content:center;">
+    <div style="display:flex;flex-direction:column;justify-content:center;margin-top:2%;">
       <div id="map"></div>
       <div style="display:flex;flex-direction:column;justify-content:space-around;height:100px;">
-       <div style="margin-top:10%;border:1px dashed rgb(175, 156, 156)"><h1 class="headings">No of Wi-SUN Nodes:&nbsp;<span style="color:green;" id="wisuncount"></span></h1><h1 class="headings">No of Active Nodes:&nbsp;<span style="color:green;" id="activecount">0</span></h1></div>
+        <div style="margin-top:10%;border:1px dashed rgb(175, 156, 156);display:flex;">
+          <h1 class="headings">No of Wi-SUN Nodes:&nbsp;<span style="color:green;" id="wisuncount"></span></h1>
+          <h1 class="headings">No of Active Nodes:&nbsp;<span style="color:green;" id="activecount">0</span></h1>
+        </div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <div>
-        <div class="myDiv"><iframe style="width:500px;height: 300px;" src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&kiosk=&panelId=53" width="450" height="200" frameborder="0"></iframe></div>
+        <div class="myDiv"><iframe style="width:400px;height:200px;"
+            src="https://smartcitylivinglab.iiit.ac.in/grafana/d-solo/kyLuJXQ7z/summary_view?orgId=3&refresh=5s&kiosk=&panelId=53"
+            width="450" height="200" frameborder="0"></iframe></div>
       </div>
       <div>
-        <h1 class="headings">Latency</h1>
+        <h1 class="statusdetails">Latency</h1>
         <div id="myDiv3"></div>
       </div>
     </div>
   </div>
   <script>
-    let activeNodeCount=0
+    let activeNodeCount = 0
     var map = L.map("map").setView([17.445369, 78.349937], 18);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: "© OpenStreetMap",
+      className: 'map-tiles'
     }).addTo(map);
     nodes = [
-      ["VindhyaA2(I)", 17.445174, 78.34997,"WN-LPO2-02",".LP02ON",".LP02OFF"],
-      ["TobeNamed", 17.445367, 78.349737,"WN-LP03-02",".LP03ON",".LP03OFF"],
-      ["VindhyaA4(I)", 17.445561, 78.349519,"WN-LP04-02",".LP04ON",".LP04OFF"],
+      ["VindhyaA2(I)", 17.445174, 78.34997, "WN-LPO2-02", ".LP02ON", ".LP02OFF"],
+      ["TobeNamed", 17.445367, 78.349737, "WN-LP03-02", ".LP03ON", ".LP03OFF"],
+      ["VindhyaA4(I)", 17.445561, 78.349519, "WN-LP04-02", ".LP04ON", ".LP04OFF"],
       // ["VindhyaA4(II)", 17.44564, 78.349392,"WN-LP04-02"],
-      ["VindhyaA6(I)", 17.445808, 78.349193,"WN-LP05-02",".LP05ON",".LP05OFF"],
+      ["VindhyaA6(I)", 17.445808, 78.349193, "WN-LP05-02", ".LP05ON", ".LP05OFF"],
       // ["VindhyaA6(II)", 17.445944, 78.349067,"WN-LP05-02"],
-      ["PollLamp", 17.445100, 78.349947,"WN-LP01-03",".LP01ON",".LP01OFF"],
+      ["PollLamp", 17.445100, 78.349947, "WN-LP01-03", ".LP01ON", ".LP01OFF"],
       // ["VindhyaA2(II)", 17.445041, 78.350087,"WN-LP02-02"],
-      ["Pole26",17.445363,78.351186,"WN-LP06-01",".LP06ON",".LP06OFF"],
-      ["Pole25",17.445192,78.350941,"WN-LP07-01",".LP07ON",".LP07OFF"],
-      ["Pole22",17.444897,78.350772,"WN-LP08-01",".LP08ON",".LP08OFF"],
-      ["Pole21",17.444843,78.350652,"WN-LP09-01",".LP09ON",".LP09OFF"],
-      ["Pole20",17.444524,78.350334,"WN-LP10-01",".LP10ON",".LP10OFF"],
-      ["Pole19",17.444374,78.350209,"WN-LP12-01",".LP12ON",".LP12OFF"],
-      ["Pole18",17.444275,78.349894,"WN-LP12-01",".LP12ON",".LP12OFF"],
-      ["Pole59",17.445425,78.348516,"WN-LP20-01",".LP20ON",".LP20OFF"],
-      ["Pole67",17.445629,78.348365,"WN-LP21-01",".LP21ON",".LP21OFF"],
-      ["Pole78",17.446124,78.348429,"WN-LP22-01",".LP22ON",".LP22OFF"],
-      ["Pole77",17.446225,78.348707,"WN-LP23-01",".LP23ON",".LP23OFF"],
-      ["Pole80",17.446363,78.348946,"WN-LP24-01",".LP24ON",".LP24OFF"],
-      ["Pole81",17.446485,78.349105,"WN-LP25-01",".LP25ON",".LP25OFF"],
-      ["Pole83",17.446749,78.349350,"WN-LP27-01",".LP27ON",".LP27OFF"],
-      ["Pole84",17.446831,78.349501,"WN-LP28-01",".LP28ON",".LP28OFF"],
-      ["Pole38",17.446746,78.349531,"WN-LP29-01",".LP29ON",".LP29OFF"],
-      ["Pole 37",17.446648,78.349788,"WN-LP30-01",".LP30ON",".LP30OFF"]
+      ["Pole26", 17.445363, 78.351186, "WN-LP06-01", ".LP06ON", ".LP06OFF"],
+      ["Pole25", 17.445192, 78.350941, "WN-LP07-01", ".LP07ON", ".LP07OFF"],
+      ["Pole22", 17.444897, 78.350772, "WN-LP08-01", ".LP08ON", ".LP08OFF"],
+      ["Pole21", 17.444843, 78.350652, "WN-LP09-01", ".LP09ON", ".LP09OFF"],
+      ["Pole20", 17.444524, 78.350334, "WN-LP10-01", ".LP10ON", ".LP10OFF"],
+      ["Pole19", 17.444374, 78.350209, "WN-LP12-01", ".LP12ON", ".LP12OFF"],
+      ["Pole18", 17.444275, 78.349894, "WN-LP12-01", ".LP12ON", ".LP12OFF"],
+      ["Pole59", 17.445425, 78.348516, "WN-LP20-01", ".LP20ON", ".LP20OFF"],
+      ["Pole67", 17.445629, 78.348365, "WN-LP21-01", ".LP21ON", ".LP21OFF"],
+      ["Pole78", 17.446124, 78.348429, "WN-LP22-01", ".LP22ON", ".LP22OFF"],
+      ["Pole77", 17.446225, 78.348707, "WN-LP23-01", ".LP23ON", ".LP23OFF"],
+      ["Pole80", 17.446363, 78.348946, "WN-LP24-01", ".LP24ON", ".LP24OFF"],
+      ["Pole81", 17.446485, 78.349105, "WN-LP25-01", ".LP25ON", ".LP25OFF"],
+      ["Pole83", 17.446749, 78.349350, "WN-LP27-01", ".LP27ON", ".LP27OFF"],
+      ["Pole84", 17.446831, 78.349501, "WN-LP28-01", ".LP28ON", ".LP28OFF"],
+      ["Pole38", 17.446746, 78.349531, "WN-LP29-01", ".LP29ON", ".LP29OFF"],
+      ["Pole 37", 17.446648, 78.349788, "WN-LP30-01", ".LP30ON", ".LP30OFF"]
     ];
     var customOptions = { 'width': '600', 'className': 'popupCustom' };
     var customOptions2 = { 'className': "custom", offset: [5, 62] };
-    document.getElementById("wisuncount").innerHTML=nodes.length;
+    document.getElementById("wisuncount").innerHTML = nodes.length;
     for (let i = 0; i < nodes.length; i++) {
-      var content=`<div style="display:flex;flex-direction:column;width:200px;height:fit-content" onclick="PopupContent('` + nodes[i][0] +`')"><div class="popupcontent"><strong>NodeID:&nbsp;${nodes[i][3]}</strong></div><div class="popupcontent"><strong>RSSI:&nbsp;${-72}dB</strong></div><div class="popupcontent"><strong>Latency:&nbsp;${628}ms</strong></div></div>`
+      var content = `<div style="display:flex;flex-direction:column;width:200px;height:fit-content" onclick="PopupContent('` + nodes[i][0] + `')"><div class="popupcontent"><strong>NodeID:&nbsp;${nodes[i][3]}</strong></div><div class="popupcontent"><strong>RSSI:&nbsp;${-72}dB</strong></div><div class="popupcontent"><strong>Latency:&nbsp;${628}ms</strong></div></div>`
       let popup = L.popup({
         closeOnclick: false,
         autoClose: false,
       }).setContent(nodes[i][0]);
-      let popup2=L.popup({
-        closeOnclick:false,
-        autoClose:true,
+      let popup2 = L.popup({
+        closeOnclick: false,
+        autoClose: true,
       }).setContent(content);
       // labelCircle = L.circle([nodes[i][1], nodes[i][2]], {
       //   color: "#orange",
@@ -235,36 +265,35 @@
       //   radius: 4.0,
       //   offset: L.point(100, -500),
       // })
-        // .bindPopup(popup, customOptions2)
-        // .addTo(map)
-        // .openPopup();
+      // .bindPopup(popup, customOptions2)
+      // .addTo(map)
+      // .openPopup();
       circle = new L.circle([nodes[i][1], nodes[i][2]], {
-        color: "#7d7b77",
-        fillColor: "lightgray",
+        color: "#e8e82b",
+        fillColor: "blue",
         fillOpacity: 0.7,
-        radius: 2.0,
+        radius: 3.0,
       })
         .bindPopup(popup2, customOptions)
         .addTo(map).openPopup()
-      circle.on('mouseover',function(e){
+      circle.on('mouseover', function (e) {
         this.openPopup()
       })
-      let flag=0;
-      circle.on('click',function(e){
-        if(!flag){
-          this.setStyle({fillColor:'green'})
+      let flag = 0;
+      circle.on('click', function (e) {
+        if (!flag) {
+          this.setStyle({ fillColor: 'green' })
           test(i)
-          flag=1;
+          flag = 1;
           activeNodeCount++;
-          document.getElementById("activecount").innerHTML=activeNodeCount
+          document.getElementById("activecount").innerHTML = activeNodeCount
         }
-        else
-        {
-          this.setStyle({fillColor:'lightgray'})
+        else {
+          this.setStyle({ fillColor: 'blue' })
           test1(i)
-          flag=0;
+          flag = 0;
           activeNodeCount--;
-          document.getElementById("activecount").innerHTML=activeNodeCount
+          document.getElementById("activecount").innerHTML = activeNodeCount
         }
       })
       // circle.on('dblclick',function(e){
@@ -275,129 +304,129 @@
     }
     var trace1 = {
       x: [1, 2, 3, 4],
-      y: [20,28,27,35],
+      y: [20, 28, 27, 35],
       type: 'scatter'
     };
-    var trace4={
-      x:[1,2,3,4],
-      y:[39,35,29,20]
+    var trace4 = {
+      x: [1, 2, 3, 4],
+      y: [39, 35, 29, 20]
     }
     var trace2 = {
-      x: [-85, -80, -75, -70],
-      y: [7, 3, 2, 1],
+      y: [-85, -80, -75, -70],
+      x: [7, 3, 2, 1],
       type: 'scatter',
-      marker:{
-        color:'red'
+      marker: {
+        color: 'red'
       }
     };
-    var trace3={
-      x:[64,128,256],
-      y:[0,500,1000,],
-      type:'scatter',
-      marker:{
-        color:'red'
+    var trace3 = {
+      x: [64, 128, 256],
+      y: [0, 500, 1000,],
+      type: 'scatter',
+      marker: {
+        color: 'red'
       }
     }
-    var layout={
-      paper_bgcolor:'#181B1F',
-      plot_bgcolor:'#181B1F',
-      xaxis:{
-        title:{
-          text:'hours'
+    var layout = {
+      paper_bgcolor: '#181B1F',
+      plot_bgcolor: '#181B1F',
+      xaxis: {
+        title: {
+          text: 'hours'
         }
       },
-      yaxis:{
-        title:{
-          text:'Celsius'
-        }
-      }
-    }
-    var layout1={
-      paper_bgcolor:'#181B1F',
-      plot_bgcolor:'#181B1F',
-      xaxis:{
-        title:{
-          text:'hours'
-        },
-       
-      },
-      yaxis:{
-        title:{
-          text:'%RH'
-        },
-        titlefont:{
-          color:'white'
-        },
-        gridColor:'#000'
-      }
-    }
-    var layout2={
-      paper_bgcolor:'#181B1F',
-      plot_bgcolor:'#181B1F',
-      xaxis:{
-        title:{
-          text:'RSSI(db)'
-        },
-        titlefont:{
-          color:'white'
-        },
-        gridcolor:'white',
-        tickfont:{
-          size:15,
-          color:'white'
-        }
-      },
-      yaxis:{
-        title:{
-          text:'Distance'
-        },
-        titlefont:{
-          color:'white'
-        },
-        gridcolor:'white',
-        tickfont:{
-          size:15,
-          color:'white'
+      yaxis: {
+        title: {
+          text: 'Celsius'
         }
       }
     }
-    var layout3={
-      paper_bgcolor:'#181B1F',
-      plot_bgcolor:'#181B1F',
-      xaxis:{
-        title:{
-          text:'PacketSize(bytes)'
+    var layout1 = {
+      paper_bgcolor: '#181B1F',
+      plot_bgcolor: '#181B1F',
+      xaxis: {
+        title: {
+          text: 'hours'
         },
-        titlefont:{
-          color:'white'
+
+      },
+      yaxis: {
+        title: {
+          text: '%RH'
         },
-        gridcolor:'white',
-        tickfont:{
-          size:15,
-          color:'white'
+        titlefont: {
+          color: 'white'
+        },
+        gridColor: '#000'
+      }
+    }
+    var layout2 = {
+      paper_bgcolor: '#181B1F',
+      plot_bgcolor: '#181B1F',
+      yaxis: {
+        title: {
+          text: 'RSSI(db)'
+        },
+        titlefont: {
+          color: 'white'
+        },
+        gridcolor: 'white',
+        tickfont: {
+          size: 15,
+          color: 'white'
         }
       },
-      yaxis:{
-        title:{
-          text:'microSeconds'
+      xaxis: {
+        title: {
+          text: 'hours'
         },
-        titlefont:{
-          color:'white'
+        titlefont: {
+          color: 'white'
         },
-        gridcolor:'white',
-        tickfont:{
-          size:15,
-          color:'white'
+        gridcolor: 'white',
+        tickfont: {
+          size: 15,
+          color: 'white'
+        }
+      }
+    }
+    var layout3 = {
+      paper_bgcolor: '#181B1F',
+      plot_bgcolor: '#181B1F',
+      yaxis: {
+        title: {
+          text: 'PacketSize(bytes)'
+        },
+        titlefont: {
+          color: 'white'
+        },
+        gridcolor: 'white',
+        tickfont: {
+          size: 15,
+          color: 'white'
+        }
+      },
+      xaxis: {
+        title: {
+          text: 'milliSeconds(ms)'
+        },
+        titlefont: {
+          color: 'white'
+        },
+        gridcolor: 'white',
+        tickfont: {
+          size: 15,
+          color: 'white'
         }
       }
     }
     var data = [trace1];
-    var data1=[trace2]
-    var latencydata=[trace3]
+    var data1 = [trace2]
+    var latencydata = [trace3]
     // Plotly.newPlot('myDiv', data,layout);
-    Plotly.newPlot('myDiv1',data1,layout2);
+    Plotly.newPlot('myDiv1', data1, layout2);
     // Plotly.newPlot('myDiv2',[trace4],layout1);
-    Plotly.newPlot('myDiv3',latencydata,layout3)
+    Plotly.newPlot('myDiv3', latencydata, layout3)
 
   </script>
   <script>
@@ -408,126 +437,124 @@
     let id5 = document.getElementById("node5");
     let id6 = document.getElementById("node6");
     let dim = document.getElementById("dim");
-    function test1(index)
-    {
+    function test1(index) {
       $.ajax({
-          url:`/switch?command=off&id=${nodes[index][5]}`,
-          method:"POST",
-          contentType:"application/json",
-        })
+        url: `/switch?command=off&id=${nodes[index][5]}`,
+        method: "POST",
+        contentType: "application/json",
+      })
     }
-    function test(index)
-    {
+    function test(index) {
       $.ajax({
-          url:`/switch?command=on&id=${nodes[index][4]}`,
-          method:"POST",
-          contentType:"application/json",
-        })
+        url: `/switch?command=on&id=${nodes[index][4]}`,
+        method: "POST",
+        contentType: "application/json",
+      })
     }
-    function Do(id) {
-      let current_id = document.getElementById(id);
-      if (id1 == current_id) {
-        if (current_id.value == "on") {
-          current_id.value = "off";
-          $.ajax({
-            url: "/switch?command=on&id=1",
-            method: "POST",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "on");
-        } else {
-          current_id.value = "on";
-          $.ajax({
-            url: "/switch?command=off&id=1",
-            method: "POST",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "off")
-        }
-      } else if (id2 == current_id) {
-        if (current_id.value == "on") {
-          current_id.value = "off";
-          $.ajax({
-            url: "/switch?command=on&id=2",
-            method: "POST",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "on")
-        } else {
-          current_id.value = "on";
-          $.ajax({
-            url: "/switch?command=off&id=2",
-            method: "POST",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "off")
-        }
-      } else if (id3 == current_id) {
-        if (current_id.value == "on") {
-          current_id.value = "off";
-          $.ajax({
-            url: "/switch?command=on&id=3",
-            method: "GET",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "on")
-        } else {
-          current_id.value = "on";
-          $.ajax({
-            url: "/switch?command=off&id=3",
-            method: "GET",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "off")
-        }
-      } else if (id4 == current_id) {
-        if (current_id.value == "on") {
-          current_id.value = "off";
-          $.ajax({
-            url: "/switch?command=on&id=4",
-            method: "GET",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "on")
-        } else {
-          current_id.value = "on";
-          $.ajax({
-            url: "/switch?command=off&id=4",
-            method: "GET",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "off")
-        }
-      } else if (id5 == current_id) {
-        if (current_id.value == "on") {
-          current_id.value = "off";
-          dim.style.display = "block"
-          $.ajax({
-            url: "/switch?command=on&id=5",
-            method: "GET",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "on")
-        } else {
-          current_id.value = "on";
-          dim.style.display = "none"
-          $.ajax({
-            url: "/switch?command=off&id=5",
-            method: "GET",
-            contentType: "application/json",
-          });
-          showStatus(current_id, "off")
-        }
-      }
-      else if (dim == current_id) {
-        console.log("inin")
-        $.ajax({
-          url: "/switch?command=dim&id=5",
-          method: "GET",
-          contentType: "application/json"
-        })
-        showStatus(current_id, "dim")
-      }
+    // function Do(id) {
+    //   let current_id = document.getElementById(id);
+    //   if (id1 == current_id) {
+    //     if (current_id.value == "on") {
+    //       current_id.value = "off";
+    //       $.ajax({
+    //         url: "/switch?command=on&id=1",
+    //         method: "POST",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "on");
+    //     } else {
+    //       current_id.value = "on";
+    //       $.ajax({
+    //         url: "/switch?command=off&id=1",
+    //         method: "POST",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "off")
+    //     }
+    //   } else if (id2 == current_id) {
+    //     if (current_id.value == "on") {
+    //       current_id.value = "off";
+    //       $.ajax({
+    //         url: "/switch?command=on&id=2",
+    //         method: "POST",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "on")
+    //     } else {
+    //       current_id.value = "on";
+    //       $.ajax({
+    //         url: "/switch?command=off&id=2",
+    //         method: "POST",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "off")
+    //     }
+    //   } else if (id3 == current_id) {
+    //     if (current_id.value == "on") {
+    //       current_id.value = "off";
+    //       $.ajax({
+    //         url: "/switch?command=on&id=3",
+    //         method: "GET",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "on")
+    //     } else {
+    //       current_id.value = "on";
+    //       $.ajax({
+    //         url: "/switch?command=off&id=3",
+    //         method: "GET",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "off")
+    //     }
+    //   } else if (id4 == current_id) {
+    //     if (current_id.value == "on") {
+    //       current_id.value = "off";
+    //       $.ajax({
+    //         url: "/switch?command=on&id=4",
+    //         method: "GET",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "on")
+    //     } else {
+    //       current_id.value = "on";
+    //       $.ajax({
+    //         url: "/switch?command=off&id=4",
+    //         method: "GET",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "off")
+    //     }
+    //   } else if (id5 == current_id) {
+    //     if (current_id.value == "on") {
+    //       current_id.value = "off";
+    //       dim.style.display = "block"
+    //       $.ajax({
+    //         url: "/switch?command=on&id=5",
+    //         method: "GET",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "on")
+    //     } else {
+    //       current_id.value = "on";
+    //       dim.style.display = "none"
+    //       $.ajax({
+    //         url: "/switch?command=off&id=5",
+    //         method: "GET",
+    //         contentType: "application/json",
+    //       });
+    //       showStatus(current_id, "off")
+    //     }
+    //   }
+    //   else if (dim == current_id) {
+    //     console.log("inin")
+    //     $.ajax({
+    //       url: "/switch?command=dim&id=5",
+    //       method: "GET",
+    //       contentType: "application/json"
+    //     })
+    //     showStatus(current_id, "dim")
+    //   }
       // else if (id6 == current_id) {
       //   if (current_id.value == "on") {
       //     current_id.value = "off";
@@ -547,61 +574,61 @@
       //     })
       //   }
       // }
-    }
-    function showStatus(id, value) {
-      if (id == id1) {
-        if (value == "on") {
-          console.log("in")
-          circlesObj[0].setStyle({ fillColor: 'green' })
-          circlesObj[7].setStyle({ fillColor: 'green' })
-        }
-        else if (value == "off") {
-          circlesObj[0].setStyle({ fillColor: '#7d7b77' })
-          circlesObj[7].setStyle({ fillColor: '#7d7b77' })
-        }
-      }
-      else if (id == id2) {
-        if (value == "on") {
-          console.log("in")
-          circlesObj[1].setStyle({ fillColor: 'green' })
-        }
-        else if (value == "off") {
-          circlesObj[1].setStyle({ fillColor: '#7d7b77' })
-        }
-      }
-      else if (id == id3) {
-        if (value == "on") {
-          circlesObj[2].setStyle({ fillColor: 'green' })
-          circlesObj[3].setStyle({ fillColor: 'green' })
-        }
-        else {
-          circlesObj[2].setStyle({ fillColor: '#7d7b77' })
-          circlesObj[3].setStyle({ fillColor: '#7d7b77' })
-        }
-      }
-      else if (id == id4) {
-        if (value == "on") {
-          circlesObj[4].setStyle({ fillColor: 'green' })
-          circlesObj[5].setStyle({ fillColor: 'green' })
-        }
-        else {
-          circlesObj[4].setStyle({ fillColor: '#7d7b77' })
-          circlesObj[5].setStyle({ fillColor: '#7d7b77' })
-        }
-      }
-      else if (id == id5) {
-        if (value == "on") {
-          circlesObj[6].setStyle({ fillColor: 'green' })
-        }
-        else {
-          circlesObj[6].setStyle({ fillColor: '#7d7b77' })
-        }
-      }
-      else if (id == dim) {
-        circlesObj[6].setStyle({ fillColor: '#37a141' })
-      }
-    }
-    function PopupContent(x){
+    // }
+    // function showStatus(id, value) {
+    //   if (id == id1) {
+    //     if (value == "on") {
+    //       console.log("in")
+    //       circlesObj[0].setStyle({ fillColor: 'green' })
+    //       circlesObj[7].setStyle({ fillColor: 'green' })
+    //     }
+    //     else if (value == "off") {
+    //       circlesObj[0].setStyle({ fillColor: '#7d7b77' })
+    //       circlesObj[7].setStyle({ fillColor: '#7d7b77' })
+    //     }
+    //   }
+    //   else if (id == id2) {
+    //     if (value == "on") {
+    //       console.log("in")
+    //       circlesObj[1].setStyle({ fillColor: 'green' })
+    //     }
+    //     else if (value == "off") {
+    //       circlesObj[1].setStyle({ fillColor: '#7d7b77' })
+    //     }
+    //   }
+    //   else if (id == id3) {
+    //     if (value == "on") {
+    //       circlesObj[2].setStyle({ fillColor: 'green' })
+    //       circlesObj[3].setStyle({ fillColor: 'green' })
+    //     }
+    //     else {
+    //       circlesObj[2].setStyle({ fillColor: '#7d7b77' })
+    //       circlesObj[3].setStyle({ fillColor: '#7d7b77' })
+    //     }
+    //   }
+    //   else if (id == id4) {
+    //     if (value == "on") {
+    //       circlesObj[4].setStyle({ fillColor: 'green' })
+    //       circlesObj[5].setStyle({ fillColor: 'green' })
+    //     }
+    //     else {
+    //       circlesObj[4].setStyle({ fillColor: '#7d7b77' })
+    //       circlesObj[5].setStyle({ fillColor: '#7d7b77' })
+    //     }
+    //   }
+    //   else if (id == id5) {
+    //     if (value == "on") {
+    //       circlesObj[6].setStyle({ fillColor: 'green' })
+    //     }
+    //     else {
+    //       circlesObj[6].setStyle({ fillColor: '#7d7b77' })
+    //     }
+    //   }
+    //   else if (id == dim) {
+    //     circlesObj[6].setStyle({ fillColor: '#37a141' })
+    //   }
+    // }
+    function PopupContent(x) {
       console.log(x)
     }
   </script>
